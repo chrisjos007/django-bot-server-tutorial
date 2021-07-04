@@ -8,4 +8,4 @@ class CallCount(models.Model):
     dumb = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.username}"
+        return f"{self.email}"
