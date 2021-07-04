@@ -43,13 +43,15 @@
                     
                     <div class="row" id="send-box">
                         
-                        <div id="messageToSend" contenteditable="true" class="pull-left" data-ph="Type your message..."></div>
-                        
-
-                        <div class="pull-right send-button-div">
-                            <button  id="messageSendButton" type="button" onclick="sendTextMessage()">
-                                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                            </button>  
+                        <div class="container send-button-div">
+                            <div class="row">
+                                <button class="col-sm-3 btn btn-info" type="button" value='fat' onclick="sendTextMessage('{{ user_email }}')">fat</button>
+                                <button class="col-sm-3 btn btn-light" type="button" value='stupid' onclick="sendTextMessage('{{ user_email }}')">stupid</button>
+                                <button class="col-sm-3 btn btn-info" type="button" value='dumb' onclick="sendTextMessage('{{ user_email }}')">dumb</button>
+                            </div>
+                            <!-- <input type="button" class='px-5' value="fat" onclick="sendTextMessage()">
+                            <input type="button" class='px-5' value="stupid" onclick="sendTextMessage()"> 
+                            <input type="button" class='px-5' value="dumb" onclick="sendTextMessage()">   -->
                         </div>
 
                     </div>

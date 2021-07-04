@@ -6,10 +6,11 @@ import random
 from django.utils.decorators import method_decorator
 from django.http.response import HttpResponse
 from django.shortcuts import render
+from .models import CallCount
 
 
 def chat(request):
-    context = {}
+    context = {'user_email': request.user.email}
     return render(request, 'chatbot_tutorial/chatbot.html', context)
 
 
@@ -21,11 +22,13 @@ def respond_to_websockets(message):
                 """ Yo' Mama is so fat, when the cops see her on a street corner, they yell, "Hey you guys, break it up!" """],
      'dumb':   ["""Yo' Mama is so dumb, when God was giving out brains, she thought they were milkshakes and asked for extra thick.""",
                 """Yo' Mama is so dumb, she locked her keys inside her motorcycle."""] 
-     }  
+     }
 
     result_message = {
         'type': 'text'
     }
+    existing = CallCount.objects.filter(email=message['usermail'])
+
     if 'fat' in message['text']:
         result_message['text'] = random.choice(jokes['fat'])
     
@@ -40,5 +43,13 @@ def respond_to_websockets(message):
     else:
         result_message['text'] = "I don't know any responses for that. If you're interested in yo mama jokes tell me fat, stupid or dumb."
 
+    if existing.exists():
+        entry = existing.first()
+        count = getattr(entry, message['text'], -1)
+        setattr(entry, message['text'], count+1)
+    else:
+        entry = CallCount.objects.create(email=message['usermail'], )
+        setattr(entry, message['text'], 1)
+    entry.save()
     return result_message
     

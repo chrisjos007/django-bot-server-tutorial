@@ -39,13 +39,15 @@ function processAndDisplayChatMessage(message){
 }
 
 
-function sendTextMessage() {
-    if ($('#messageToSend').text() == "") {
-        return
-    }
+function sendTextMessage(email) {
+	// debugger;
+    // if ($('#messageToSend').text() == "") {
+    //     return
+    // }
 
     message = {}
-    message.text = $('#messageToSend').html().replace("</div>", "").replace("<div>", "\n").replace("<br>", "\n");
+	message.text = document.activeElement.value;
+	message.usermail = email
     message.command= 'send'
     message.timestamp = new Date();
     

@@ -76,13 +76,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'chatbot_tutorial.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
+DATABASES = {                # get frpm env file or hardcode
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'DB_NAME',
+        'USER': 'DB_USER',
+        'PASSWORD': 'DB_PASSWORD',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -117,7 +122,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -132,3 +137,5 @@ CHANNEL_LAYERS = {
         "ROUTING": "chatbot_tutorial.routing.channel_routing",
     },
 }
+
+ASGI_APPLICATION = 'chatbot_tutorial.routing.application'
